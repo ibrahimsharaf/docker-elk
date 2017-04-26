@@ -26,10 +26,6 @@ Based on the official images:
 2. Install [Docker-compose](http://docs.docker.com/compose/install/) **version >= 1.6**.
 3. Clone this repository
 
-## Increase `vm.max_map_count` on your host
-
-You need to increase the `vm.max_map_count` kernel setting on your Docker host.
-To do this follow the recommended instructions from the Elastic documentation: [Install Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode)
 
 ## SELinux
 
@@ -42,17 +38,7 @@ $ chcon -R system_u:object_r:admin_home_t:s0 docker-elk/
 
 # Usage
 
-Start the ELK stack using *docker-compose*:
-
-```bash
-$ docker-compose up
-```
-
-You can also choose to run it in background (detached mode):
-
-```bash
-$ docker-compose up -d
-```
+Run ```./up_stack``` to start the ELK stack, which increases `vm.max_map_count` on your host (mandatory to run elasticsearch [Install Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode)) then runs ` docker-compose up`
 
 Now that the stack is running, you'll want to inject logs in it. The shipped logstash configuration allows you to send content via tcp:
 
