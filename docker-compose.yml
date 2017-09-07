@@ -18,6 +18,9 @@ services:
       xpack.watcher.enabled: "false"
     networks:
       - elk
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+    #  - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 
   logstash:
     build: logstash/
