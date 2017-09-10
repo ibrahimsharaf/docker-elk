@@ -48,6 +48,17 @@ services:
     depends_on:
       - elasticsearch
 
+  filebeat:
+    build: filebeat/
+    volumes:
+      - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
+    ports:
+      - "5043:5043"
+    networks:
+      - elk
+    depends_on:
+      - logstash
+
 networks:
 
   elk:
