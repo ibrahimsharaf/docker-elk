@@ -1,0 +1,10 @@
+filebeat.prospectors:
+- input_type: log
+  paths:
+    - /logs/logs/finished/**/*.log
+  multiline:
+    pattern: '^%{TIMESTAMP_ISO8601} '
+    match: after
+
+output.logstash:
+  hosts: ["localhost:5043"]
