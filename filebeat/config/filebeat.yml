@@ -1,12 +1,14 @@
 filebeat.prospectors:
-- type: Finished
+- document_type: kipp
+  input_type: finished
   paths:
     - /logs/logs/finished/**/*.log
   multiline:
     pattern: '^%{TIMESTAMP_ISO8601} '
     match: after
 
-- type: Running
+- document_type: kipp
+  input_type: running
   paths:
     - /logs/logs/running/**/*.log
   multiline:
