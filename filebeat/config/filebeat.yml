@@ -1,18 +1,11 @@
 filebeat.prospectors:
-- document_type: finished
-  input_type: log
+- input_type: log
   paths:
-    - /logs/logs/finished/**/*.log
+    - /logs/logs/**/*.log
+  include_lines: ['.engine\.py', '.statscollectors\.py', '.ERROR', '.Dropped: Item is not valid', '.DEBUG: Scraped from', '.WARNING: Item at url']
   multiline:
-    pattern: '^%{TIMESTAMP_ISO8601} '
-    match: after
-
-- document_type: running
-  input_type: log
-  paths:
-    - /logs/logs/running/**/*.log
-  multiline:
-    pattern: '^%{TIMESTAMP_ISO8601} '
+    pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}'
+    negate: true
     match: after
 
 output.logstash:

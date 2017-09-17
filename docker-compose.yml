@@ -27,7 +27,6 @@ services:
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
       - ./logstash/pipeline:/usr/share/logstash/pipeline
-      - .:/logs
     ports:
       - "5000:5000"
     environment:
@@ -50,6 +49,8 @@ services:
 
   filebeat:
     build: filebeat/
+    volumes:
+      - .:/logs
     ports:
       - "5043:5043"
     networks:
