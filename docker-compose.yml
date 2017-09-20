@@ -1,51 +1,56 @@
 version: '2'
+networks:
+  belk:
+    driver: bridge
 
 services:
+  filebeat:
+    build: application/filebeat/
+    command: filebeat -e -strict.perms=false
+    volumes:
+      - ./configuration/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ./ssl_tool:/etc/ssl:ro
+      - ./logs:/var/kipp/logs:ro
+    networks:
+      - belk
+    depends_on:
+      - logstash
+
+  logstash:
+    build: application/logstash/
+    volumes:
+      - ./configuration/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./configuration/logstash/pipeline:/usr/share/logstash/pipeline
+      - ./ssl_tool:/etc/ssl:ro
+    ports:
+      - "5000:5000"
+      - "5044:5044"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - belk
+    depends_on:
+      - elasticsearch
 
   elasticsearch:
-    build: elasticsearch/
+    build: application/elasticsearch/
+    volumes:
+      - ./configuration/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     ports:
       - "9200:9200"
       - "9300:9300"
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-      # disable X-Pack
-      # see https://www.elastic.co/guide/en/x-pack/current/xpack-settings.html
-      #     https://www.elastic.co/guide/en/x-pack/current/installing-xpack.html#xpack-enabling
-      xpack.security.enabled: "false"
-      xpack.monitoring.enabled: "false"
-      xpack.graph.enabled: "false"
-      xpack.watcher.enabled: "false"
     networks:
-      - elk
-
-  logstash:
-    build: logstash/
-    volumes:
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
-      - ./logstash/pipeline:/usr/share/logstash/pipeline
-      - .:/logs
-    ports:
-      - "5000:5000"
-    environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-    networks:
-      - elk
-    depends_on:
-      - elasticsearch
+      - belk
 
   kibana:
-    build: kibana/
+    build: application/kibana/
     volumes:
-      - ./kibana/config/:/usr/share/kibana/config
+      - ./configuration/kibana/:/usr/share/kibana/config
     ports:
       - "5601:5601"
     networks:
-      - elk
+      - belk
     depends_on:
       - elasticsearch
-
-networks:
-
-  elk:
-    driver: bridge
