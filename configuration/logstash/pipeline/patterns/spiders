@@ -1,2 +1,2 @@
-SPIDER_RUN INFO.*?Spider opened.*
-SPIDER_HALT INFO.*?Closing spider.*
+SPIDER_RUN .*?Spider\sopened.*
+SPIDER_HALT .*?Closing\sspider.*
