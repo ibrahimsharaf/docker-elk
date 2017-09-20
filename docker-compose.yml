@@ -20,7 +20,10 @@ services:
     build: application/logstash/
     volumes:
       - ./configuration/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./configuration/logstash/pipelines.yml:/usr/share/logstash/config/pipelines.yml
       - ./configuration/logstash/pipeline:/usr/share/logstash/pipeline
+      - ./configuration/logstash/pipeline/running-pipeline.cfg:/usr/share/logstash/pipeline/running-pipeline.cfg
+      - ./configuration/logstash/pipeline/finished-pipeline.cfg:/usr/share/logstash/pipeline/finished-pipeline.cfg
       - ./ssl_tool:/etc/ssl:ro
     ports:
       - "5000:5000"
