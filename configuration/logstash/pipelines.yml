@@ -1,6 +1,0 @@
-- pipeline.id: running-pipeline
-  path.config: "/usr/share/logstash/pipeline/running-pipeline.conf"
-  pipeline.workers: 3
-- pipeline.id: finished-pipeline
-  path.config: "/usr/share/logstash/pipeline/finished-pipeline.conf"
-  queue.type: persisted

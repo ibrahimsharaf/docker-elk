@@ -1,12 +1,29 @@
-logging.level: info
+logging.level: debug
 filebeat.prospectors:
 - type: log
   paths:
     - /var/kipp/logs/**/*.log
+  include_lines: ['.ERROR', '.Dropped: Item is not valid', '.DEBUG: Scraped from', '.WARNING: Item at url']
+  exclude_lines: ['.Dumping Scrapy stats']
+  enabled: true
+  fields:
+    spider_state: "running"
+  multiline:
+    pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}[[:space:]][0-9]{2}:[0-9]{2}:[0-9]{2}[[:space:]]'
+    negate: true
+    match: after
+
+- type: log
+  paths:
+    - /var/kipp/logs/**/*.log
+  include_lines: ['.Dumping Scrapy stats', '.ERROR']
+  enabled: true
+  fields:
+    spider_state: "finished"
   multiline:
     pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}[[:space:]][0-9]{2}:[0-9]{2}:[0-9]{2}[[:space:]]'
     negate: true
     match: after
 
 output.logstash:
-  hosts: ["logstash:5044"]
+  hosts: ["logstash:5045"]

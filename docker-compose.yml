@@ -19,15 +19,18 @@ services:
   logstash:
     build: application/logstash/
     volumes:
-      - ./configuration/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
-      - ./configuration/logstash/pipelines.yml:/usr/share/logstash/config/pipelines.yml
+      - ./configuration/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./configuration/logstash/config/pipelines.yml:/usr/share/logstash/config/pipelines.yml
       - ./configuration/logstash/pipeline:/usr/share/logstash/pipeline
+      - ./configuration/logstash/pipeline/patterns/spiders:/usr/share/logstash/pipeline/patterns/spiders
+      - ./configuration/logstash/pipeline/patterns:/usr/share/logstash/pipeline/patterns
       - ./configuration/logstash/pipeline/running-pipeline.cfg:/usr/share/logstash/pipeline/running-pipeline.cfg
       - ./configuration/logstash/pipeline/finished-pipeline.cfg:/usr/share/logstash/pipeline/finished-pipeline.cfg
       - ./ssl_tool:/etc/ssl:ro
     ports:
       - "5000:5000"
       - "5044:5044"
+      - "5043:5043"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
