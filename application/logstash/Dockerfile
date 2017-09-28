@@ -16,7 +16,7 @@ RUN yum -y install python-pip
 RUN pip install --upgrade pip
 RUN pip install elasticsearch
 
-RUN touch /var/test.txt
-RUN chmod 777 /var/test.txt
+#RUN touch /var/test.txt
+#RUN chmod 777 /var/test.txt
 
 USER logstash

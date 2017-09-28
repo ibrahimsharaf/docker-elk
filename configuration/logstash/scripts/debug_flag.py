@@ -5,8 +5,8 @@ source_query = ''
 
 for logstash_line in sys.stdin:
     source_query = str(logstash_line).strip()
-    with open("/var/test.txt", "w") as text_file:
-        text_file.write("Pipe Output was: {}".format(source_query))
+    #with open("/var/test.txt", "w") as text_file:
+    #    text_file.write("Pipe Output was: {}".format(source_query))
     break
 
 # update all documents matching the source and running state
