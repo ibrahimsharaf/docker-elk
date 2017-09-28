@@ -22,6 +22,7 @@ services:
       - ./configuration/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
       - ./configuration/logstash/config/pipelines.yml:/usr/share/logstash/config/pipelines.yml
       - ./configuration/logstash/pipeline:/usr/share/logstash/pipeline
+      - ./configuration/logstash/scripts/debug_flag.py:/usr/share/logstash/scripts/debug_flag.py
       - ./configuration/logstash/pipeline/patterns/spiders:/usr/share/logstash/pipeline/patterns/spiders
       - ./configuration/logstash/pipeline/patterns:/usr/share/logstash/pipeline/patterns
       - ./configuration/logstash/pipeline/running-pipeline.cfg:/usr/share/logstash/pipeline/running-pipeline.cfg
@@ -29,6 +30,7 @@ services:
       - ./ssl_tool:/etc/ssl:ro
     ports:
       - "5000:5000"
+      - "5045:5045"
       - "5044:5044"
       - "5043:5043"
     environment:
