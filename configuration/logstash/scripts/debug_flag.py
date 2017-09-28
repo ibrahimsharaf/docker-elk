@@ -12,7 +12,7 @@ for logstash_line in sys.stdin:
 # update all documents matching the source and running state
 query = {
      "script": {
-        "inline": "ctx._source.spider_state='hefna_debug'",
+        "inline": "ctx._source.spider_state='debug'",
         "lang": "painless"
      },
      "query": {
@@ -20,7 +20,7 @@ query = {
           "must": [
             {
               "match" : {
-                "spider_state": "test_debug777"
+                "spider_state": "running"
               }
             },
             {
