@@ -1,1 +1,0 @@
-Output Data: /var/kipp/logs/demo/010102017.log
