@@ -20,8 +20,8 @@ filebeat.prospectors:
 - type: log
   paths:
     - /var/kipp/logs/**/*.log
-  include_lines: ['.Dumping Scrapy stats', '.ERROR']
-  exclude_lines: ['.Spider closed', '.Dropped: Item is not valid', '.DEBUG: Scraped from', '.WARNING: Item at url']
+  include_lines: ['.Dumping Scrapy stats']
+  exclude_lines: ['.ERROR', '.Spider closed', '.Dropped: Item is not valid', '.DEBUG: Scraped from', '.WARNING: Item at url']
   enabled: true
   fields_under_root: true
   fields:
