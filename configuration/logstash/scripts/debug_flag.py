@@ -1,13 +1,15 @@
 import sys
 from elasticsearch import Elasticsearch, exceptions
+#
+# source_query = ''
+#
+# for line in sys.stdin:
+#     source_query = str(line).strip()
+#     #with open("/var/test.txt", "w") as text_file:
+#     #    text_file.write("Pipe Output was: {}".format(source_query))
+#     break
 
-source_query = []
-
-for logstash_line in sys.stdin:
-    source_query.append(str(logstash_line).strip())
-    #with open("/var/test.txt", "w") as text_file:
-    #    text_file.write("Pipe Output was: {}".format(source_query))
-    break
+source_query = str(sys.argv[1]).strip()
 
 # update all documents matching the source and running state
 query = {
@@ -25,7 +27,7 @@ query = {
             },
             {
               "match" : {
-                "source": "{}".format(source_query[0])
+                "source": "{}".format(source_query)
               }
             }
           ]
