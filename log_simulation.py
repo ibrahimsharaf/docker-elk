@@ -1,4 +1,4 @@
-import sys
+#import sys
 import argparse
 from time import sleep
 
@@ -15,4 +15,4 @@ with open(args.log) as f1:
         for line in lines:
             f0.write(line)
             #print(line.strip())
-            sleep(1)
+            sleep(15)
