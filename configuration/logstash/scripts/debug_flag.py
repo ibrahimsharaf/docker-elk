@@ -1,8 +1,6 @@
 import sys
 from elasticsearch import Elasticsearch, exceptions
 
-source_query = ''
-
 for logstash_line in sys.stdin:
     source_query = str(logstash_line).strip()
     #with open("/var/test.txt", "w") as text_file:
