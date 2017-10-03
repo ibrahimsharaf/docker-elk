@@ -4,17 +4,17 @@ networks:
     driver: bridge
 
 services:
-  filebeat:
-    build: application/filebeat/
-    command: filebeat -e -strict.perms=false
-    volumes:
-      - ./configuration/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
-      - ./ssl_tool:/etc/ssl:ro
-      - ./logs:/var/kipp/logs:ro
-    networks:
-      - belk
-    depends_on:
-      - logstash
+#  filebeat:
+#    build: application/filebeat/
+#    command: filebeat -e -strict.perms=false
+#    volumes:
+#      - ./configuration/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+#      - ./ssl_tool:/etc/ssl:ro
+#      - ./logs:/var/kipp/logs:ro
+#    networks:
+#      - belk
+#    depends_on:
+#      - logstash
 
   logstash:
     build: application/logstash/
