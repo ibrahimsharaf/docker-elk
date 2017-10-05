@@ -1,5 +1,4 @@
-logging.level: info
-
+logging.level: debug
 
 filebeat.prospectors:
 
@@ -7,7 +6,8 @@ filebeat.prospectors:
   paths:
     - /var/kipp/logs/**/*.log
   include_lines: ['.Spider opened', '.ERROR', '.Dropped: Item is not valid', '.DEBUG: Scraped from', '.WARNING: Item at url']
-  #exclude_lines: ['.Dumping Scrapy stats', '.Spider closed']
+  #exclude_lines: ['.Spider closed', '.statscollectors.']
+  exclude_files: ['.live_extractor', '.scrapyd', '.polipo', '.kipp_', 'test']
   enabled: true
   fields_under_root: true
   fields:
@@ -20,8 +20,9 @@ filebeat.prospectors:
 - type: log
   paths:
     - /var/kipp/logs/**/*.log
-  include_lines: ['.INFO: Dumping Scrapy stats:']
+  include_lines: ['.statscollectors']
   #exclude_lines: ['.errors detected', '.ERROR', '.Spider closed', '.Dropped: Item is not valid', '.DEBUG: Scraped from', '.WARNING: Item at url']
+  exclude_files: ['.live_extractor', '.scrapyd', '.polipo', '.kipp_', 'test']
   enabled: true
   fields_under_root: true
   fields:
@@ -36,6 +37,7 @@ filebeat.prospectors:
     - /var/kipp/logs/**/*.log
   include_lines: ['.Spider closed']
   #exclude_lines: ['.Spider opened', '.ERROR', '.Dropped: Item is not valid', '.DEBUG: Scraped from', '.WARNING: Item at url']
+  exclude_files: ['.live_extractor', '.scrapyd', '.polipo', '.kipp_', 'test']
   enabled: true
   fields_under_root: true
   fields:
