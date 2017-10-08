@@ -1,5 +1,14 @@
 # Docker BELK stack
 
+This fork is meant to be used with KIPP, having the filebeat running on KIPP maching and the ELK stack on Docker or otherwise running on a different machine/cluster.
+
+TODO: Need to clean up the rest of this README below.
+
+To run filebeat on kipp-vagrant:
+
+    sudo filebeat -e --strict.perms=false -c /apps/kipp/kipp/beats/config/filebeat.yml
+
+
 Project forked from [docker-elk](https://github.com/deviantony/docker-elk).
 
 Run the latest version of the BELK (Elasticsearch, Logstash, Kibana, Beats) stack with Docker and Docker Compose.
