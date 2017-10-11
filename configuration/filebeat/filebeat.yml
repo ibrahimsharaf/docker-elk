@@ -5,7 +5,7 @@ filebeat.prospectors:
 - type: log
   paths:
     - /var/kipp/logs/**/*.log
-  include_lines: ['.Spider opened', '.ERROR', '.Dropped: Item is not valid', '.DEBUG: Scraped from', '.WARNING: Item at url']
+  include_lines: ['.logstats', '.Spider opened', '.ERROR', '.Dropped: Item is not valid', '.DEBUG: Scraped from', '.WARNING: Item at url']
   #exclude_lines: ['.Spider closed', '.statscollectors.']
   exclude_files: ['.live_extractor', '.scrapyd', '.polipo', '.kipp_', 'test']
   enabled: true
