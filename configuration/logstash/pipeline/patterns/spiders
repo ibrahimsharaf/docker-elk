@@ -1,2 +1,2 @@
-SPIDER_RUN (.*?Spider.*)
-SPIDER_HALT (.*?Closing spider.*)
+SPIDER_RUN .*?Spider\sopened.*
+SPIDER_HALT .*?Closing\sspider.*

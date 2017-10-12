@@ -1,1 +1,1 @@
-FROM docker.elastic.co/beats/filebeat:5.5.0
+FROM docker.elastic.co/beats/filebeat:6.0.0-beta2

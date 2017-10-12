@@ -4,27 +4,35 @@ networks:
     driver: bridge
 
 services:
-  filebeat:
-    build: application/filebeat/
-    command: filebeat -e -strict.perms=false
-    volumes:
-      - ./configuration/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
-      - ./ssl_tool:/etc/ssl:ro
-      - ./logs:/var/kipp/logs:ro
-    networks:
-      - belk
-    depends_on:
-      - logstash
+#  filebeat:
+#    build: application/filebeat/
+#    command: filebeat -e -strict.perms=false
+#    volumes:
+#      - ./configuration/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+#      - ./ssl_tool:/etc/ssl:ro
+#      - ./logs:/var/kipp/logs:ro
+#    networks:
+#      - belk
+#    depends_on:
+#      - logstash
 
   logstash:
     build: application/logstash/
     volumes:
-      - ./configuration/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./configuration/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./configuration/logstash/config/pipelines.yml:/usr/share/logstash/config/pipelines.yml
       - ./configuration/logstash/pipeline:/usr/share/logstash/pipeline
+      - ./configuration/logstash/scripts/debug_flag.py:/usr/share/logstash/scripts/debug_flag.py
+      - ./configuration/logstash/pipeline/patterns/spiders:/usr/share/logstash/pipeline/patterns/spiders
+      - ./configuration/logstash/pipeline/patterns:/usr/share/logstash/pipeline/patterns
+      - ./configuration/logstash/pipeline/running-pipeline.cfg:/usr/share/logstash/pipeline/running-pipeline.cfg
+      - ./configuration/logstash/pipeline/finished-pipeline.cfg:/usr/share/logstash/pipeline/finished-pipeline.cfg
       - ./ssl_tool:/etc/ssl:ro
     ports:
       - "5000:5000"
+      - "5045:5045"
       - "5044:5044"
+      - "5043:5043"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:

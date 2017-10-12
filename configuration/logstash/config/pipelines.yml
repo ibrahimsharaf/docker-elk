@@ -1,0 +1,11 @@
+- pipeline.id: running_pipeline
+  path.config: "/usr/share/logstash/pipeline/running-pipeline.cfg"
+  pipeline.workers: 1
+
+- pipeline.id: finished_pipeline
+  path.config: "/usr/share/logstash/pipeline/finished-pipeline.cfg"
+  pipeline.workers: 1
+
+- pipeline.id: combined_pipeline
+  path.config: "/usr/share/logstash/pipeline/combined-pipeline.cfg"
+  pipeline.workers: 1
